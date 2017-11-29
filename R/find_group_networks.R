@@ -1,5 +1,5 @@
 #' Create subgroup networks containing only within group ties
-#' 
+#'
 #' @param network Either an \emph{n} by \emph{n} adjacency matrix, a \code{igraph} object, or \code{network} object.
 #' @param grouping_variable Either a vector of node attributes indicating group membership or a data frame with vertex names in column 1 and group in column 2
 #' @param type (Optional) The type of object passed to the \code{network} argument. Either "igraph", "matrix", or "network". If Not provided, will determine type from network provided.
@@ -41,8 +41,11 @@ find_group_networks <- function(network, grouping_variable,
   if (is.null(type)) {
     type <- class(network)
   }
-  if (type == "network") {
+  if (type == "network" | class(network) == "network") {
     require(intergraph)
+    if (!"vertex.names" %in% network::list.vertex.attributes(network)){
+      network %v% "vertex.names" <- seq(network::network.size(network))
+    }
     net <- asIgraph(network)
     V(net)$name <- V(net)$vertex.names
   } else {
@@ -100,7 +103,7 @@ find_group_networks <- function(network, grouping_variable,
     map(`[`, c("ego", "alter")) %>%
     map(~ graph_from_data_frame(.x)) -> between_group_networks
   no_between %>%
-    map(~ make_empty_graph() %>%!
+    map(~ make_empty_graph() %>%
           add_vertices(1) %>%
           set_vertex_attr(., "name", value = .x)) ->  no_between_networks
 
