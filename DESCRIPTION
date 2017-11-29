@@ -1,11 +1,21 @@
 Package: egoist
-Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Version: 0.0.0.9000
+Title: What the Package Does (one line, title case)
+Description: What the package does (one paragraph).
+Authors@R: person("First", "Last", , "first.last@example.com", c("aut", "cre"))
+License: What license it uses
 Encoding: UTF-8
 LazyData: true
+ByteCompile: true
+Suggests: 
+    testthat
+RoxygenNote: 6.0.1
+Imports: 
+    ggplot2,
+    purrr,
+    dplyr,
+    igraph,
+    ggraph,
+    reshape2,
+    sna,
+    intergraph
